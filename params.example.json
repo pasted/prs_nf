@@ -1,0 +1,15 @@
+// Example parameter configuration file
+// Save as params.json or params.yaml and run with: nextflow run main.nf -params-file params.json
+
+{
+    "vcf_target": "../../data/imputed_from_kaur/microglia_samples.GRCh38.filtered.vcf.gz",
+    "vcf_1000g": "/lustre/scratch123/hgi/teams/trynka/resources/1000g/1000G/release/20220422/b38/EUR/1000G_EUR_maf05perc_biallelic_nonmissing_nochr_withrsid.vcf.gz",
+    "gwas": "/lustre/scratch123/hgi/teams/trynka/resources/summary_statistics/public/GCST90027158/harmonised/35379992-GCST90027158-MONDO_0004975.h.tsv.gz",
+    "coloc_results": "../../../OTAR2065_sc_eQTL/data/results/8.colocalisation_analysis/coloc_results/all_GWAS_colocalisations.csv",
+    "prsice_dir": "/software/hgi/envs/conda/team217/ma23/PRSice",
+    "apoe_snps": "../../data/prs_ad_bellenguez/APOE_snps.txt",
+    "apoe_region": "../../data/prs_ad_bellenguez/apoe_region_coords.bed",
+    "treatments": ["untreated", "LPS", "IFN"],
+    "prs_name": "prs_ad_bellenguez",
+    "outdir": "./results"
+}

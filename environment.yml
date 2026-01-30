@@ -1,0 +1,14 @@
+name: prs_nf
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - nextflow>=21.10.0
+  - plink2
+  - r-base
+  - r-tidyverse
+  - r-data.table
+  - r-optparse
+  # For PRSice (install separately)
+  # - prsice (if available in conda)
