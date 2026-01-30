@@ -147,7 +147,7 @@ params.treatments = ["untreated", "LPS", "IFN", "TNF", "IL6"]
 
 #### Adjusting Resource Requirements
 ```groovy
-// In nextflow.config
+// In configuration/nextflow.config
 withLabel: 'high_memory' {
     memory = '500 GB'  // Increase for large datasets
     cpus = 64          // Use more CPUs
@@ -157,14 +157,14 @@ withLabel: 'high_memory' {
 
 #### Using Different GWAS
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --gwas /path/to/different_gwas.tsv.gz \
     --prs_name new_prs_name
 ```
 
 #### Running Subset of Processes
 ```bash
-# Skip certain processes by commenting in main.nf
+# Skip certain processes by commenting in src/main.nf
 # Or modify workflow {} section to conditionally run processes
 ```
 
@@ -174,7 +174,7 @@ nextflow run main.nf \
    ```bash
    # Create minimal test inputs
    # Run single process directly
-   nextflow run main.nf -entry REMOVE_APOE_REGION ...
+   nextflow run src/main.nf -entry REMOVE_APOE_REGION ...
    ```
 
 2. **Integration Test with Subset Data**

@@ -25,20 +25,20 @@ All functionality preserved with improved structure:
 ## Files Created/Modified
 
 ### Core Pipeline Files
-- **main.nf** (407 lines) - Complete Nextflow workflow with all 9 processes
-- **nextflow.config** - Configuration for local execution and resource specifications
-- **profiles.config** - Execution profiles for LSF, SLURM, Docker, Singularity
+- **src/main.nf** (407 lines) - Complete Nextflow workflow with all 9 processes
+- **configuration/nextflow.config** - Configuration for local execution and resource specifications
+- **configuration/profiles.config** - Execution profiles for LSF, SLURM, Docker, Singularity
 
 ### Supporting Files
-- **scripts/get_coloc_positions.R** - R script for filtering GWAS by colocalization
-- **environment.yml** - Conda environment specification
-- **Dockerfile** - Container image with all dependencies
-- **params.example.json** - Example parameter file
+- **src/scripts/get_coloc_positions.R** - R script for filtering GWAS by colocalization
+- **configuration/environment.yml** - Conda environment specification
+- **configuration/Dockerfile** - Container image with all dependencies
+- **configuration/params.example.json** - Example parameter file
 
 ### Documentation
-- **README.md** - Complete pipeline documentation
-- **QUICKSTART.md** - Quick start guide for new users
-- **MIGRATION_GUIDE.md** - Detailed Snakemake→Nextflow migration guide
+- **documentation/README.md** - Complete pipeline documentation
+- **documentation/QUICKSTART.md** - Quick start guide for new users
+- **documentation/MIGRATION_GUIDE.md** - Detailed Snakemake→Nextflow migration guide
 
 ## Key Features
 
@@ -68,9 +68,9 @@ withLabel: 'high_memory' {
 
 ### 4. Execution Profiles
 ```bash
-nextflow run main.nf -profile lsf      # LSF cluster
-nextflow run main.nf -profile slurm    # SLURM cluster
-nextflow run main.nf -profile docker   # Docker containers
+nextflow run src/main.nf -profile lsf      # LSF cluster
+nextflow run src/main.nf -profile slurm    # SLURM cluster
+nextflow run src/main.nf -profile docker   # Docker containers
 ```
 
 ### 5. Built-in Monitoring
@@ -123,21 +123,21 @@ nextflow run main.nf -profile docker   # Docker containers
 
 ### Local Execution
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --vcf_target data/samples.vcf.gz \
     --outdir results
 ```
 
 ### HPC Cluster (LSF)
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     -profile lsf \
     --outdir /scratch/user/prs_results
 ```
 
 ### With Docker
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     -profile docker \
     --vcf_target /data/samples.vcf.gz \
     --outdir results
@@ -145,7 +145,7 @@ nextflow run main.nf \
 
 ### Resume After Failure
 ```bash
-nextflow run main.nf -resume
+nextflow run src/main.nf -resume
 ```
 
 ## Configuration Examples
@@ -161,14 +161,14 @@ process {
 
 ### Switch to Different GWAS
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --gwas /path/to/pd_gwas.tsv.gz \
     --prs_name prs_pd
 ```
 
 ### Add More Treatments
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --treatments untreated,LPS,IFN,TNF,IL6
 ```
 
@@ -187,7 +187,7 @@ nextflow run main.nf \
 
 1. **Setup Environment**
    ```bash
-   conda env create -f environment.yml
+   conda env create -f configuration/environment.yml
    conda activate prs_nf
    ```
 
@@ -199,42 +199,47 @@ nextflow run main.nf \
    ```
 
 3. **Check Paths**
-   - Edit `nextflow.config` to match your system paths
+   - Edit `configuration/nextflow.config` to match your system paths
    - Verify PLINK2, R, and PRSice installations
    - Update data paths in `params.*`
 
 4. **Test Pipeline**
    ```bash
-   nextflow run main.nf -profile standard --help
+   nextflow run src/main.nf -profile standard --help
    ```
 
 5. **Run Full Pipeline**
    ```bash
-   nextflow run main.nf -profile lsf
+   nextflow run src/main.nf -profile lsf
    ```
 
 ## Troubleshooting Resources
 
 - **QUICKSTART.md** - For common issues and solutions
 - **MIGRATION_GUIDE.md** - For Snakemake-specific questions
-- **main.nf comments** - Inline documentation of processes
-- **nextflow.config** - Resource and queue specifications
+- **src/main.nf comments** - Inline documentation of processes
+- **configuration/nextflow.config** - Resource and queue specifications
 
 ## File Structure
 
 ```
 prs_nf/
-├── main.nf                 # Main workflow (407 lines)
-├── nextflow.config         # Local configuration
-├── profiles.config         # Environment-specific profiles
-├── environment.yml         # Conda dependencies
-├── Dockerfile              # Container specification
-├── params.example.json     # Example parameters
-├── scripts/
-│   └── get_coloc_positions.R  # Colocalization filtering script
-├── README.md               # Main documentation
-├── QUICKSTART.md           # Quick start guide
-└── MIGRATION_GUIDE.md      # Migration details
+├── src/
+│   ├── main.nf                 # Main workflow (407 lines)
+│   └── scripts/
+│       └── get_coloc_positions.R  # Colocalization filtering script
+├── configuration/
+│   ├── nextflow.config         # Local configuration
+│   ├── profiles.config         # Environment-specific profiles
+│   ├── environment.yml         # Conda dependencies
+│   ├── Dockerfile              # Container specification
+│   └── params.example.json     # Example parameters
+├── documentation/
+│   ├── README.md               # Main documentation
+│   ├── QUICKSTART.md           # Quick start guide
+│   └── MIGRATION_GUIDE.md      # Migration details
+└── project/
+    └── LICENSE                 # License file
 ```
 
 ## Support & Documentation

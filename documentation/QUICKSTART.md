@@ -12,11 +12,11 @@ chmod +x nextflow
 ### 2. Install Dependencies
 ```bash
 # Option A: Using Conda
-conda env create -f environment.yml
+conda env create -f configuration/environment.yml
 conda activate prs_nf
 
 # Option B: Using Docker
-docker build -t prs-nf:latest .
+docker build -t prs-nf:latest configuration/
 ```
 
 ### 3. Install PRSice
@@ -34,7 +34,7 @@ mkdir -p test_data
 cp /path/to/real/data/sample.vcf.gz test_data/
 
 # Run with test data
-nextflow run main.nf \
+nextflow run src/main.nf \
     --vcf_target test_data/sample.vcf.gz \
     --outdir test_results \
     -profile standard
@@ -44,29 +44,29 @@ nextflow run main.nf \
 
 #### On Local Machine
 ```bash
-nextflow run main.nf -profile standard
+nextflow run src/main.nf -profile standard
 ```
 
 #### On LSF Cluster (HGI Farm)
 ```bash
-nextflow run main.nf -profile lsf
+nextflow run src/main.nf -profile lsf
 ```
 
 #### On SLURM Cluster
 ```bash
-nextflow run main.nf -profile slurm
+nextflow run src/main.nf -profile slurm
 ```
 
 #### With Docker
 ```bash
-nextflow run main.nf -profile docker
+nextflow run src/main.nf -profile docker
 ```
 
 ## Customizing Parameters
 
 ### Method 1: Command Line
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --vcf_target /path/to/target.vcf.gz \
     --vcf_1000g /path/to/1000g.vcf.gz \
     --outdir ./my_results \
@@ -76,15 +76,15 @@ nextflow run main.nf \
 ### Method 2: Parameter File
 ```bash
 # Create my_params.json with custom values
-cp params.example.json my_params.json
+cp configuration/params.example.json my_params.json
 # Edit my_params.json as needed
-nextflow run main.nf -params-file my_params.json
+nextflow run src/main.nf -params-file my_params.json
 ```
 
 ### Method 3: Configuration File
 ```bash
-# Edit nextflow.config and run
-nextflow run main.nf -c my_config.config
+# Edit configuration/nextflow.config and run
+nextflow run src/main.nf -c configuration/my_config.config
 ```
 
 ## Monitoring Pipeline Execution
@@ -111,7 +111,7 @@ cat results/trace.txt
 
 If a process fails and you fix the issue, you can resume:
 ```bash
-nextflow run main.nf -resume
+nextflow run src/main.nf -resume
 ```
 
 The `-resume` flag will re-run only failed tasks and their descendants.
@@ -153,8 +153,8 @@ results/
 conda activate prs_nf
 
 # If using Docker
-docker build -t prs-nf:latest .
-nextflow run main.nf -profile docker
+docker build -t prs-nf:latest configuration/
+nextflow run src/main.nf -profile docker
 ```
 
 ### Issue: File not found errors
@@ -196,27 +196,27 @@ nextflow log last
 nextflow clean -f
 
 # View available options
-nextflow run main.nf --help
+nextflow run src/main.nf --help
 
 # List process definitions
-nextflow run main.nf -list
+nextflow run src/main.nf -list
 ```
 
 ## Advanced Usage
 
 ### Changing Number of Parallel Tasks
 ```bash
-nextflow run main.nf -qs 10  # Limit to 10 queued jobs
+nextflow run src/main.nf -qs 10  # Limit to 10 queued jobs
 ```
 
 ### Specifying Work Directory
 ```bash
-nextflow run main.nf -w /custom/work/dir
+nextflow run src/main.nf -w /custom/work/dir
 ```
 
 ### Using Different Java Memory Settings
 ```bash
-NXF_OPTS='-Xmx8g' nextflow run main.nf
+NXF_OPTS='-Xmx8g' nextflow run src/main.nf
 ```
 
 ## Performance Tips
@@ -229,7 +229,7 @@ NXF_OPTS='-Xmx8g' nextflow run main.nf
 
 ## Getting Help
 
-- Check the [main README.md](README.md) for pipeline overview
+- Check the [README.md](../README.md) for pipeline overview
 - See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for Snakemake differences
 - Visit [Nextflow Documentation](https://www.nextflow.io/docs/)
 - Check PRSice logs in `${outdir}/PRSice/` directory
@@ -237,7 +237,7 @@ NXF_OPTS='-Xmx8g' nextflow run main.nf
 ## Next Steps
 
 1. Install dependencies (Nextflow, PLINK2, R with PRSice)
-2. Verify paths in `nextflow.config` match your system
+2. Verify paths in `configuration/nextflow.config` match your system
 3. Run with `-profile standard` for initial testing
 4. Switch to `-profile lsf` (or appropriate cluster) for production runs
 5. Monitor execution and adjust parameters as needed

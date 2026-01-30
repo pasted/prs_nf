@@ -23,9 +23,9 @@ Successfully ported a complete Polygenic Risk Score (PRS) calculation pipeline f
 ### Core Pipeline Files
 | File | Lines | Purpose |
 |------|-------|---------|
-| [main.nf](main.nf) | 407 | Complete workflow with 9 processes |
-| [nextflow.config](nextflow.config) | 68 | Configuration for local execution |
-| [profiles.config](profiles.config) | 76 | Environment-specific profiles |
+| [src/main.nf](../src/main.nf) | 407 | Complete workflow with 9 processes |
+| [configuration/nextflow.config](../configuration/nextflow.config) | 68 | Configuration for local execution |
+| [configuration/profiles.config](../configuration/profiles.config) | 76 | Environment-specific profiles |
 
 ### Supporting Code
 | File | Lines | Purpose |
@@ -142,7 +142,7 @@ conda activate prs_nf
 ### Step 3: Run
 ```bash
 nextflow run main.nf -profile standard
-# Or for HPC: nextflow run main.nf -profile lsf
+# Or for HPC: nextflow run src/main.nf -profile lsf
 ```
 
 ---
@@ -252,8 +252,8 @@ nextflow run main.nf -profile standard
 
 ### 2. HPC Cluster
 ```bash
-nextflow run main.nf -profile lsf  # HGI Farm
-nextflow run main.nf -profile slurm # Generic SLURM
+nextflow run src/main.nf -profile lsf  # HGI Farm
+nextflow run src/main.nf -profile slurm # Generic SLURM
 ```
 
 ### 3. Containerized Execution

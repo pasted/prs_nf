@@ -53,13 +53,13 @@ Detailed technical documentation:
 ### For System Administrators
 Configuration and deployment:
 
-6. **[nextflow.config](nextflow.config)**
+6. **[../configuration/nextflow.config](../configuration/nextflow.config)**
    - Local execution settings
    - Resource specifications
    - Process labels
    - Reporting options
 
-7. **[profiles.config](profiles.config)**
+7. **[../configuration/profiles.config](../configuration/profiles.config)**
    - LSF cluster configuration
    - SLURM cluster configuration
    - Docker configuration
@@ -74,16 +74,16 @@ Configuration and deployment:
    - Key features
    - Next steps
 
-9. **[environment.yml](environment.yml)**
+9. **[../configuration/environment.yml](../configuration/environment.yml)**
    - Conda dependency specification
    - Package versions
 
-10. **[Dockerfile](Dockerfile)**
+10. **[../configuration/Dockerfile](../configuration/Dockerfile)**
     - Container image specification
     - Base image and packages
     - Verification steps
 
-11. **[params.example.json](params.example.json)**
+11. **[../configuration/params.example.json](../configuration/params.example.json)**
     - Example parameter configuration
     - Reference for all available parameters
 
@@ -109,38 +109,41 @@ Configuration and deployment:
 
 ### Path 4: System Administration (1-2 hours)
 1. README.md - Requirements
-2. profiles.config - Available profiles
-3. nextflow.config - Local configuration
-4. Dockerfile - Containerization
-5. environment.yml - Dependencies
+2. ../configuration/profiles.config - Available profiles
+3. ../configuration/nextflow.config - Local configuration
+4. ../configuration/Dockerfile - Containerization
+5. ../configuration/environment.yml - Dependencies
 
 ## 📁 File Structure Overview
 
 ```
 prs_nf/
-├── 📘 Documentation
+├── 📘 documentation/
 │   ├── README.md                 ← Main documentation
 │   ├── QUICKSTART.md             ← Fast setup guide
 │   ├── MIGRATION_GUIDE.md        ← Snakemake→Nextflow guide
 │   ├── IMPLEMENTATION_NOTES.md   ← Technical details
 │   ├── WORKFLOW_DIAGRAM.md       ← Visual diagrams
-│   └── PORT_SUMMARY.md           ← High-level overview
+│   ├── PORT_SUMMARY.md           ← High-level overview
+│   └── INDEX.md                  ← This file
 │
-├── 🔧 Configuration
+├── 🔧 configuration/
 │   ├── nextflow.config           ← Main configuration
 │   ├── profiles.config           ← Execution profiles
 │   ├── params.example.json       ← Example parameters
 │   ├── environment.yml           ← Conda environment
 │   └── Dockerfile                ← Container image
 │
-├── 💻 Code
+├── 💻 src/
 │   ├── main.nf                   ← Main workflow (407 lines)
 │   └── scripts/
 │       └── get_coloc_positions.R ← GWAS filtering script
 │
-└── 📋 Project Files
-    ├── LICENSE                   ← License file
-    └── .git/                     ← Version control
+├── 📋 project/
+│   └── LICENSE                   ← License file
+│
+├── README.md                      ← Root README
+└── .git/                          ← Version control
 ```
 
 ## 🚀 Quick Command Reference
@@ -152,26 +155,26 @@ git clone <repo-url>
 cd prs_nf
 
 # Setup environment
-conda env create -f environment.yml
+conda env create -f configuration/environment.yml
 conda activate prs_nf
 ```
 
 ### Execution
 ```bash
 # Local execution
-nextflow run main.nf
+nextflow run src/main.nf
 
 # With custom parameters
-nextflow run main.nf --outdir /custom/path
+nextflow run src/main.nf --outdir /custom/path
 
 # On cluster
-nextflow run main.nf -profile lsf
+nextflow run src/main.nf -profile lsf
 
 # Resume after failure
-nextflow run main.nf -resume
+nextflow run src/main.nf -resume
 
 # With Docker
-nextflow run main.nf -profile docker
+nextflow run src/main.nf -profile docker
 ```
 
 ### Monitoring
@@ -213,7 +216,7 @@ A: In the `results/` directory (or your custom `--outdir`).
 A: ~2-4 hours depending on data size. See IMPLEMENTATION_NOTES.md.
 
 **Q: Can I resume a failed run?**
-A: Yes! Use `nextflow run main.nf -resume`.
+A: Yes! Use `nextflow run src/main.nf -resume`.
 
 ## 🔗 External Resources
 
@@ -236,7 +239,7 @@ A: Yes! Use `nextflow run main.nf -resume`.
 - [ ] Read QUICKSTART.md
 - [ ] Verify Nextflow installation: `nextflow -version`
 - [ ] Verify dependencies: `plink2 --version`, `Rscript --version`
-- [ ] Check file paths in `nextflow.config`
+- [ ] Check file paths in `configuration/nextflow.config`
 - [ ] Verify input files exist
 - [ ] Create output directory
 - [ ] Check available disk space (at least 50GB for work files)

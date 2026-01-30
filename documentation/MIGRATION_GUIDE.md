@@ -103,7 +103,7 @@ snakemake -j 4 --profile hpc
 
 ### Running with Nextflow
 ```bash
-nextflow run main.nf -profile lsf
+nextflow run src/main.nf -profile lsf
 ```
 
 ## Key Advantages of the Nextflow Version
@@ -112,8 +112,8 @@ nextflow run main.nf -profile lsf
 2. **Scalability**: Native support for multiple executors (SLURM, LSF, HPC, Cloud)
 3. **Reproducibility**: Built-in containerization support (Docker/Singularity)
 4. **Monitoring**: Web-based execution reports and timeline visualization
-5. **Modularity**: Can be structured into reusable modules
-6. **Resume Capability**: `nextflow run main.nf -resume` to continue from where it failed
+5. **Modularity**: Can be restructured into reusable modules
+6. **Resume Capability**: `nextflow run src/main.nf -resume` to continue from where it failed
 
 ## Configuration Profiles
 
@@ -126,16 +126,16 @@ nextflow run main.nf -profile lsf
 
 ### Using Profiles
 ```bash
-nextflow run main.nf -profile lsf -c nextflow.config
+nextflow run src/main.nf -profile lsf -c configuration/nextflow.config
 ```
 
 ## Parameter Management
 
 **Snakemake:** Defined in the Snakefile or config files
-**Nextflow:** Centralized in `nextflow.config`, can be overridden at runtime:
+**Nextflow:** Centralized in `configuration/nextflow.config`, can be overridden at runtime:
 
 ```bash
-nextflow run main.nf --outdir /custom/output --prs_name my_prs
+nextflow run src/main.nf --outdir /custom/output --prs_name my_prs
 ```
 
 ## Data Flow Differences
@@ -159,7 +159,7 @@ nextflow run main.nf --outdir /custom/output --prs_name my_prs
 ### File Not Found
 **Nextflow:** Check that input files are properly pathed and exist
 ```bash
-nextflow run main.nf --vcf_target /absolute/path/to/file.vcf.gz
+nextflow run src/main.nf --vcf_target /absolute/path/to/file.vcf.gz
 ```
 
 ### Process Fails
@@ -170,7 +170,7 @@ cat work/*/.*/.command.log
 ```
 
 ### Memory Issues
-**Nextflow:** Adjust labels in `nextflow.config`
+**Nextflow:** Adjust labels in `configuration/nextflow.config`
 ```groovy
 withLabel: 'high_memory' {
     memory = '500 GB'
@@ -188,7 +188,7 @@ withLabel: 'high_memory' {
 
 To test the pipeline locally with a subset:
 ```bash
-nextflow run main.nf -profile standard \
+nextflow run src/main.nf -profile standard \
     --vcf_target test_data/sample.vcf.gz \
     --outdir test_results
 ```

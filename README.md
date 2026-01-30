@@ -41,12 +41,12 @@ This pipeline processes genotype data and calculates PRS scores using:
 
 ### Basic execution
 ```bash
-nextflow run main.nf
+nextflow run src/main.nf
 ```
 
 ### With custom parameters
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --vcf_target /path/to/target.vcf.gz \
     --vcf_1000g /path/to/1000g.vcf.gz \
     --outdir ./my_results \
@@ -55,7 +55,7 @@ nextflow run main.nf \
 
 ### With a profile (e.g., for HPC)
 ```bash
-nextflow run main.nf -profile hpc
+nextflow run src/main.nf -profile hpc
 ```
 
 ## Output

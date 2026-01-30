@@ -1,5 +1,5 @@
 // Example parameter configuration file
-// Save as params.json or params.yaml and run with: nextflow run main.nf -params-file params.json
+// Save as params.json or params.yaml and run with: nextflow run src/main.nf -params-file params.json
 
 {
     "vcf_target": "../../data/imputed_from_kaur/microglia_samples.GRCh38.filtered.vcf.gz",
