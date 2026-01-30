@@ -263,7 +263,7 @@ Configuration:    5 KB  (6%)
 ### For First-Time Users
 1. Start with: INDEX.md
 2. Then read: QUICKSTART.md
-3. Run: `nextflow run main.nf`
+3. Run: `nextflow run src/main.nf`
 
 ### For Pipeline Developers
 1. Review: main.nf
@@ -354,7 +354,7 @@ Some files serve multiple purposes:
 
 1. **Read**: Start with INDEX.md (5 min)
 2. **Setup**: Follow QUICKSTART.md (10 min)
-3. **Run**: Execute `nextflow run main.nf` (depends on data)
+3. **Run**: Execute `nextflow run src/main.nf` (depends on data)
 4. **Check**: Review results in `results/` directory
 
 ---

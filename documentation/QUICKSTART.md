@@ -160,7 +160,7 @@ nextflow run src/main.nf -profile docker
 ### Issue: File not found errors
 **Solution:** Use absolute paths for input files
 ```bash
-nextflow run main.nf \
+nextflow run src/main.nf \
     --vcf_target /absolute/path/to/file.vcf.gz \
     --apoe_region /absolute/path/to/apoe_region.bed
 ```

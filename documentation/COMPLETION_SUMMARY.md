@@ -141,7 +141,7 @@ conda activate prs_nf
 
 ### Step 3: Run
 ```bash
-nextflow run main.nf -profile standard
+nextflow run src/main.nf -profile standard
 # Or for HPC: nextflow run src/main.nf -profile lsf
 ```
 
@@ -247,7 +247,7 @@ nextflow run main.nf -profile standard
 
 ### 1. Local Development
 ```bash
-nextflow run main.nf -profile standard
+nextflow run src/main.nf -profile standard
 ```
 
 ### 2. HPC Cluster
@@ -258,20 +258,20 @@ nextflow run src/main.nf -profile slurm # Generic SLURM
 
 ### 3. Containerized Execution
 ```bash
-nextflow run main.nf -profile docker
-nextflow run main.nf -profile singularity
+nextflow run src/main.nf -profile docker
+nextflow run src/main.nf -profile singularity
 ```
 
 ### 4. Cloud Deployment
 ```bash
 # Can be adapted for AWS, GCP, Azure
-nextflow run main.nf -profile cloud
+nextflow run src/main.nf -profile cloud
 ```
 
 ### 5. Custom Environments
 ```bash
 # Use profiles.config as template
-nextflow run main.nf -c my_custom.config
+nextflow run src/main.nf -c my_custom.config
 ```
 
 ---
@@ -280,12 +280,12 @@ nextflow run main.nf -c my_custom.config
 
 ### Change Treatments
 ```bash
-nextflow run main.nf --treatments untreated,LPS,IFN,TNF
+nextflow run src/main.nf --treatments untreated,LPS,IFN,TNF
 ```
 
 ### Use Different GWAS
 ```bash
-nextflow run main.nf --gwas /path/to/different_gwas.tsv.gz
+nextflow run src/main.nf --gwas /path/to/different_gwas.tsv.gz
 ```
 
 ### Adjust Resources
@@ -299,7 +299,7 @@ withLabel: 'high_memory' {
 
 ### Run on LSF Cluster
 ```bash
-nextflow run main.nf -profile lsf
+nextflow run src/main.nf -profile lsf
 ```
 
 ---
@@ -395,16 +395,16 @@ nextflow run main.nf -profile lsf
 ls -la prs_nf/
 
 # 2. Verify Nextflow syntax
-nextflow run main.nf -syntax-check
+nextflow run src/main.nf -syntax-check
 
 # 3. Preview workflow
-nextflow run main.nf -preview
+nextflow run src/main.nf -preview
 
 # 4. Check help
-nextflow run main.nf --help
+nextflow run src/main.nf --help
 
 # 5. View available processes
-nextflow run main.nf -list
+nextflow run src/main.nf -list
 ```
 
 ---
